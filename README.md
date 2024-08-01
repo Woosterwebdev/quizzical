@@ -9,3 +9,5 @@ Open Trivia Database API
 https://opentdb.com/
 
 The app is live at
+
+https://quizzical-351329.netlify.app
