@@ -8,6 +8,7 @@ export default function Quiz(props) {
     const [complete, setComplete] = React.useState(false)
     const url = 'https://opentdb.com/api.php?amount=5&category=11&type=multiple'
 
+    /* Fetch questions and answers from opentdb */
     React.useEffect(() => {
         fetch(url)
         .then(res => res.json())
@@ -29,10 +30,12 @@ export default function Quiz(props) {
         })
     }, [])
 
+    /* Shuffle to mix up the answers */
     function shuffleArray(array) {
         return array.sort(() => Math.random() - 0.5);
     }
 
+    /* Handles when an answer is selected */
     function handleChange(event){
         setQuiz(prevQuiz => prevQuiz.map(question => {
           return question.id === event.target.name ? 
@@ -41,6 +44,7 @@ export default function Quiz(props) {
         }))
     }
 
+    /* Checks the answers once the submit button is clicked */
     function checkAnswers(e) {
         e.preventDefault()
         quiz.map(question => {
@@ -60,6 +64,7 @@ export default function Quiz(props) {
         setComplete(true)
     }
 
+    /* Loops through and renders each question and its answers */
     const questionElements = quiz.map(object => {
         let sortAnswers = object.allAnswers.sort()
         let answers = sortAnswers.map((answer, index) => {
